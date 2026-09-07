@@ -1,0 +1,19 @@
+# 系统
+.DS_Store
+._*
+Thumbs.db
+
+# 本地开发用的小服务器
+.claude/
+
+# 成员照片的原始未压缩版，只留在本地
+素材原图/
+
+# 截图与临时文件
+_s.html
+_s.css
+_shot.html
+_shot.css
+_p/
+_q/
+previews/
