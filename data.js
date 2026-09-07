@@ -105,6 +105,8 @@ window.SITE = {
     "footer.contact":    { zh: "联系", en: "Contact" },
     "footer.icp":        { zh: "", en: "" },
 
+    "nav.skip":          { zh: "跳到主要内容", en: "Skip to main content" },
+
     "sec.about":         { zh: "我们是谁，做什么，依托哪里。", en: "Who we are, what we do, where we sit." },
     "sec.areas":         { zh: "八个方向，彼此并列，不分主次。", en: "Eight areas, listed side by side, none above another." },
     "sec.team":          { zh: "四位成员，学科背景各不相同。", en: "Four members, from different disciplines." },

@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<a class="skip" href="#main">跳到主要内容</a>
+<a class="skip" href="#main" data-i18n="nav.skip">跳到主要内容</a>
 
 <svg class="defs" aria-hidden="true" focusable="false"><defs><linearGradient id="knotGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0E9E86"/><stop offset="52%" stop-color="#5FA828"/><stop offset="100%" stop-color="#D2560B"/></linearGradient></defs><symbol id="knot" viewBox="0 0 100 100"><path pathLength="1" d="M50.00 42.23 C54.98 42.23 60.33 43.04 64.95 44.45 C69.57 45.85 74.13 48.12 77.71 50.66 C81.30 53.19 84.41 56.49 86.45 59.67 C88.50 62.85 89.74 66.54 90.00 69.73 C90.26 72.93 89.51 76.28 88.04 78.84 C86.56 81.39 84.03 83.72 81.13 85.09 C78.24 86.46 74.42 87.23 70.65 87.05 C66.87 86.86 62.46 85.82 58.47 83.99 C54.48 82.15 50.24 79.34 46.71 76.04 C43.19 72.74 39.81 68.51 37.32 64.20 C34.83 59.88 32.85 54.84 31.76 50.14 C30.67 45.44 30.35 40.35 30.76 35.98 C31.16 31.61 32.47 27.27 34.20 23.91 C35.92 20.54 38.50 17.63 41.13 15.81 C43.77 13.98 47.04 12.95 50.00 12.95 C52.96 12.95 56.23 13.98 58.87 15.81 C61.50 17.63 64.08 20.54 65.80 23.91 C67.53 27.27 68.84 31.61 69.24 35.98 C69.65 40.35 69.33 45.44 68.24 50.14 C67.15 54.84 65.17 59.88 62.68 64.20 C60.19 68.51 56.81 72.74 53.29 76.04 C49.76 79.34 45.52 82.15 41.53 83.99 C37.54 85.82 33.13 86.86 29.35 87.05 C25.58 87.23 21.76 86.46 18.87 85.09 C15.97 83.72 13.44 81.39 11.96 78.84 C10.49 76.28 9.74 72.93 10.00 69.73 C10.26 66.54 11.50 62.85 13.55 59.67 C15.59 56.49 18.70 53.19 22.29 50.66 C25.87 48.12 30.43 45.85 35.05 44.45 C39.67 43.04 45.02 42.23 50.00 42.23 Z"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="2.6" y="5.2" width="18.8" height="13.6" rx="1.4"/><path d="M3.2 6.4 12 12.9 20.8 6.4"/></symbol><symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.7"/><path d="M3.5 9.5h17M3.5 14.5h17"/><path d="M12 3.3c-2.6 2.5-3.9 5.4-3.9 8.7s1.3 6.2 3.9 8.7c2.6-2.5 3.9-5.4 3.9-8.7S14.6 5.8 12 3.3Z"/></symbol><symbol id="i-in" viewBox="0 0 24 24"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="2"/><path d="M7.6 10.4v6.3"/><circle cx="7.6" cy="7.5" r="1"/><path d="M11.6 16.7v-6.3M11.6 13c0-1.6 1-2.6 2.4-2.6 1.5 0 2.5 1 2.5 2.7v3.6"/></symbol></svg>
 
@@ -33,7 +33,7 @@
       <a href="#openings" data-i18n="nav.openings"></a>
       <a href="#contact" data-i18n="nav.join"></a>
     </nav>
-    <button type="button" id="lang-toggle" class="lang" data-i18n-aria="nav.langLabel"><span data-i18n="nav.lang"></span></button>
+    <button type="button" id="lang-toggle" class="lang" data-i18n-title="nav.langLabel"><span data-i18n="nav.lang"></span></button>
   </div>
 </header>
 
@@ -63,40 +63,40 @@
   </section>
 
   <!-- 01 关于：白底，居中大标题 -->
-  <section class="sec" id="about">
+  <section class="sec" id="about" aria-labelledby="about-h">
     <div class="wrap">
       <header class="stitle">
-        <h2 data-i18n="about.title"></h2>
+        <h2 id="about-h" data-i18n="about.title"></h2>
       </header>
       <div class="about"><p data-i18n="about.p1"></p></div>
     </div>
   </section>
 
   <!-- 02 研究方向：浅灰带 + 悬停反黑的卡片（CRR .three-grids-columns） -->
-  <section class="sec sec--grey" id="areas">
+  <section class="sec sec--grey" id="areas" aria-labelledby="areas-h">
     <div class="wrap">
       <header class="stitle">
-        <h2 data-i18n="areas.title"></h2>
+        <h2 id="areas-h" data-i18n="areas.title"></h2>
       </header>
       <ol class="areas" id="areas-list"></ol>
     </div>
   </section>
 
   <!-- 03 成员：深底 + 白卡片、7rem 圆形头像居中（CRR .team-section） -->
-  <section class="sec sec--dark" id="team">
+  <section class="sec sec--dark" id="team" aria-labelledby="team-h">
     <div class="wrap">
       <header class="stitle stitle--on-dark">
-        <h2 data-i18n="team.title"></h2>
+        <h2 id="team-h" data-i18n="team.title"></h2>
       </header>
       <ol class="team" id="team-list"></ol>
     </div>
   </section>
 
   <!-- 04 合作伙伴：白底，小卡片 -->
-  <section class="sec" id="partners">
+  <section class="sec" id="partners" aria-labelledby="partners-h">
     <div class="wrap">
       <header class="stitle">
-        <h2 data-i18n="partners.title"></h2>
+        <h2 id="partners-h" data-i18n="partners.title"></h2>
       </header>
       <ul class="pcards" id="partners-list"></ul>
     </div>
@@ -104,10 +104,10 @@
 
   <!-- 05 加入与合作：上下两块面板；每块内部三格一排。
        招募那块的第三格就是「来信请附个人简历 + 来信按钮」。 -->
-  <section class="sec sec--grey" id="openings">
+  <section class="sec sec--grey" id="openings" aria-labelledby="openings-h">
     <div class="wrap">
       <header class="stitle">
-        <h2 data-i18n="nav.openings"></h2>
+        <h2 id="openings-h" data-i18n="nav.openings"></h2>
       </header>
       <div class="panels panels--stack">
         <section class="panel">
@@ -148,7 +148,7 @@
       </div>
 
       <div class="foot__col foot__col--nav">
-        <p class="foot__ch" data-i18n="footer.links"></p>
+        <h2 class="foot__ch" data-i18n="footer.links"></h2>
         <ul>
           <li><a href="#about" data-i18n="nav.about"></a></li>
           <li><a href="#areas" data-i18n="nav.areas"></a></li>
@@ -159,7 +159,7 @@
       </div>
 
       <div class="foot__col foot__col--info">
-        <p class="foot__ch" id="foot-contact-h"></p>
+        <h2 class="foot__ch" id="foot-contact-h"></h2>
         <dl class="cinfo" id="cinfo"></dl>
       </div>
 

@@ -62,11 +62,12 @@
     var z = person.photoZoom || 1;
     /* 无照片的条目显示 mark 里的姓氏字母标，形状交给 CSS 决定 */
     if (!person.photo) {
-      return '<div class="frame frame--mark ' + cls + '">' +
+      return '<div class="frame frame--mark ' + cls + '" aria-hidden="true">' +
              '<span>' + esc(pick(person.mark) || '\u00b7\u00b7') + '</span></div>';
     }
+    /* alt 留空：姓名就在紧邻的标题里，写上去读屏会连念两遍 */
     return '<div class="frame ' + cls + '">' +
-      '<img src="' + esc(fixPhoto(person.photo)) + '" alt="' + esc(pick(person.name)) + '" loading="lazy" ' +
+      '<img src="' + esc(fixPhoto(person.photo)) + '" alt="" loading="lazy" ' +
       'style="object-position:' + esc(pos) + ';transform:scale(' + (Number(z) || 1) + ');transform-origin:' + esc(pos) + '">' +
       '</div>';
   }
@@ -81,17 +82,17 @@
            '</a>';
   }
 
-  function linkList(links, cls) {
+  function linkList(links, cls, who) {
     if (!links) { return ''; }
-    var out = [];
+    var out = [], suffix = who ? ('\uff1a' + who) : '';
     if (links.email) {
-      out.push(iconLink('mailto:' + links.email, 'email', pick(LBL.email), false));
+      out.push(iconLink('mailto:' + links.email, 'email', pick(LBL.email) + suffix, false));
     }
     if (links.site) {
-      out.push(iconLink(links.site, 'site', pick(LBL.site), true));
+      out.push(iconLink(links.site, 'site', pick(LBL.site) + suffix, true));
     }
     if (links.linkedin) {
-      out.push(iconLink(links.linkedin, 'linkedin', 'LinkedIn', true));
+      out.push(iconLink(links.linkedin, 'linkedin', 'LinkedIn' + suffix, true));
     }
     if (!out.length) { return ''; }
     return '<p class="iclinks ' + cls + '">' + out.join('') + '</p>';
@@ -118,9 +119,17 @@
     for (i = 0; i < a.length; i++) {
       a[i].setAttribute('aria-label', t(a[i].getAttribute('data-i18n-aria')));
     }
+    var ti = document.querySelectorAll('[data-i18n-title]');
+    for (i = 0; i < ti.length; i++) {
+      ti[i].setAttribute('title', t(ti[i].getAttribute('data-i18n-title')));
+    }
     document.documentElement.lang = (LANG === 'zh') ? 'zh-CN' : 'en';
     var title = pick(S.meta && S.meta.title);
     if (title) { document.title = title; }
+    /* meta description 原来写死在 HTML 里，切语言不跟着变，内容也和 data.js 对不上 */
+    var md = document.querySelector('meta[name="description"]');
+    var mdt = pick(S.meta && S.meta.description);
+    if (md && mdt) { md.setAttribute('content', mdt); }
   }
 
 
@@ -147,7 +156,7 @@
                '<p class="mem__role">' + esc(pick(m.role)) + '</p>' +
                '<div class="mem__row">' +
                  '<h3 class="mem__name">' + esc(pick(m.name)) + '</h3>' +
-                 linkList(m.links, 'mem__links') +
+                 linkList(m.links, 'mem__links', pick(m.name)) +
                '</div>' +
                '<p class="mem__affil">' + esc(pick(m.affil)) + '</p>' +
                '<p class="mem__bio">' + esc(pick(m.bio)) + '</p>' +
@@ -168,7 +177,7 @@
                '<h3 class="pc__name">' + esc(pick(p.name)) + '</h3>' +
                '<p class="pc__role">' + esc(pick(p.role)) + '</p>' +
                '<p class="pc__affil">' + esc(pick(p.affil)) + '</p>' +
-               linkList(p.links, 'pc__links') +
+               linkList(p.links, 'pc__links', pick(p.name)) +
              '</div>' +
            '</li>';
     }
@@ -263,17 +272,41 @@
     var nav = document.getElementById('nav');
     var btn = document.getElementById('nav-toggle');
     if (!nav || !btn) { return; }
-    btn.onclick = function () {
-      var open = nav.className.indexOf('is-open') > -1;
-      nav.className = open ? 'nav' : 'nav is-open';
-      btn.setAttribute('aria-expanded', open ? 'false' : 'true');
-    };
+
+    function isOpen() { return nav.className.indexOf('is-open') > -1; }
+
+    function setOpen(open, giveFocusBack) {
+      nav.className = open ? 'nav is-open' : 'nav';
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      /* 关闭后焦点原本掉到 body，键盘用户要从头 Tab 一遍 */
+      if (!open && giveFocusBack) { btn.focus(); }
+    }
+
+    btn.onclick = function () { setOpen(!isOpen(), false); };
+
     var links = nav.getElementsByTagName('a'), i;
     for (i = 0; i < links.length; i++) {
-      links[i].onclick = function () {
-        nav.className = 'nav';
-        btn.setAttribute('aria-expanded', 'false');
-      };
+      links[i].onclick = function () { setOpen(false, false); };
+    }
+
+    if (document.addEventListener) {
+      /* Esc 关闭并把焦点交还给按钮 */
+      document.addEventListener('keydown', function (e) {
+        var k = e.key || e.keyIdentifier;
+        if (isOpen() && (k === 'Escape' || k === 'Esc' || e.keyCode === 27)) {
+          setOpen(false, true);
+        }
+      }, false);
+      /* 点面板外关闭：面板是绝对定位盖在内容上的，点不回按钮就一直挡着 */
+      document.addEventListener('click', function (e) {
+        if (!isOpen()) { return; }
+        var n = e.target;
+        while (n) {
+          if (n === nav || n === btn) { return; }
+          n = n.parentNode;
+        }
+        setOpen(false, false);
+      }, false);
     }
   }
 
@@ -290,7 +323,13 @@
     }
     var links = nav.getElementsByTagName('a');
     for (i = 0; i < links.length; i++) {
-      links[i].className = (links[i].getAttribute('href') === '#' + cur) ? 'is-on' : '';
+      if (links[i].getAttribute('href') === '#' + cur) {
+        links[i].className = 'is-on';
+        links[i].setAttribute('aria-current', 'true');
+      } else {
+        links[i].className = '';
+        links[i].removeAttribute('aria-current');
+      }
     }
   }
 
