@@ -11,15 +11,12 @@
    ========================================================================= */
 
 :root{
-  /* CRR 品牌橙。它在深色上够（6.27:1），但在白底只有 2.89:1，
-     所以浅底上的橙色文字与实心按钮另用一个压深的变体。 */
-  --orange:#ff6905;        /* 深色底上的橙、纯装饰的短线 */
-  --orange-t:#c24e06;      /* 浅底上的橙色文字与按钮底：白底 4.79:1，灰带 4.50:1 */
+  --orange:#ff6905;        /* CRR 品牌橙，全站唯一强调色 */
   --navy:#222042;          /* CRR 深靛，成员深色带 */
   --title:#001122;         /* CRR 章节标题色 */
   --ink:#2b2f33;           /* 正文 */
   --ink2:#565b61;          /* 次要正文 */
-  --mut:#6c7278;           /* 标签、注释：白底 4.87:1（原 #7c8288 只有 3.88:1） */
+  --mut:#7c8288;           /* 标签、注释 */
   --paper:#ffffff;
   --grey:#f7f8f8;          /* CRR 浅灰带 */
   --line:#e3e5e6;
@@ -47,7 +44,7 @@ img{max-width:100%;display:block}
 h1,h2,h3,h4{font-weight:700;color:var(--title);line-height:1.35}
 i{font-style:normal}
 .defs{position:absolute;width:0;height:0;overflow:hidden}
-:where(a,button):focus-visible{outline:2px solid var(--orange-t);outline-offset:3px}
+:where(a,button):focus-visible{outline:2px solid var(--title);outline-offset:3px}
 
 .skip{position:absolute;left:-9999px;top:0;background:var(--title);color:#fff;padding:10px 16px;z-index:99}
 .skip:focus{left:0}
@@ -80,11 +77,11 @@ i{font-style:normal}
 
 .lang{
   flex:none;font-family:inherit;font-size:13px;font-weight:600;letter-spacing:.04em;
-  color:var(--orange-t);background:none;cursor:pointer;
-  border:1px solid var(--orange-t);border-radius:3px;padding:5px 12px;
+  color:var(--orange);background:none;cursor:pointer;
+  border:1px solid var(--orange);border-radius:3px;padding:5px 12px;
   transition:background .2s,color .2s;
 }
-.lang:hover{background:var(--orange-t);color:#fff}
+.lang:hover{background:var(--orange);color:#fff}
 
 .navbtn{
   display:none;margin-left:auto;align-items:center;gap:9px;
@@ -162,7 +159,7 @@ i{font-style:normal}
 .btn{
   display:inline-block;padding:13px 30px;
   font-size:15px;font-weight:600;letter-spacing:.03em;
-  background:var(--orange-t);color:#fff;border-radius:3px;
+  background:var(--orange);color:#fff;border-radius:3px;
   transition:background .2s,color .2s,box-shadow .2s;
 }
 .btn:hover{background:#fff;color:var(--title)}
@@ -203,7 +200,7 @@ i{font-style:normal}
 .area__n{
   display:block;
   font-size:34px;font-weight:700;line-height:1;letter-spacing:.02em;
-  color:#8a9097;   /* 对白 3.22:1，34px 大字过 3:1；原 rgba(0,17,34,.16) 只有 1.43:1 */
+  color:rgba(0,17,34,.18);   /* 纯装饰，app.js 里标了 aria-hidden，不受对比度约束 */
   transition:color .3s ease-out;
 }
 .area h3{
@@ -220,7 +217,7 @@ i{font-style:normal}
   transition:color .3s ease-out;
 }
 .area:hover{background:#000;border-color:#000}
-.area:hover .area__n{color:rgba(255,255,255,.45)}   /* 反黑后 4.4:1；原 .3 只有 2.45:1 */
+.area:hover .area__n{color:rgba(255,255,255,.32)}
 .area:hover h3{color:#fff}
 .area:hover p{color:rgba(255,255,255,.78)}
 
@@ -238,7 +235,7 @@ i{font-style:normal}
 .mem__ph{width:180px;aspect-ratio:4/5;align-self:start}
 .mem:hover .mem__ph img{transform:scale(1.04)}
 .mem__b{padding:22px 24px 24px;display:flex;flex-direction:column;min-width:0}
-.mem__role{font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--orange-t)}
+.mem__role{font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--orange)}
 .mem__row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:7px}
 .mem__name{font-size:21px;font-weight:700;letter-spacing:.04em;min-width:0}
 .mem__affil{margin-top:5px;font-size:13px;line-height:1.6;color:var(--mut)}
@@ -254,7 +251,7 @@ i{font-style:normal}
   color:var(--ink2);border:1px solid var(--line2);
   transition:color .2s,border-color .2s,background .2s;
 }
-.ic:hover{color:#fff;background:var(--orange-t);border-color:var(--orange-t)}
+.ic:hover{color:#fff;background:var(--orange);border-color:var(--orange)}
 .ic svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 
 /* ================= 04 合作伙伴 =================
@@ -274,7 +271,7 @@ i{font-style:normal}
 .pc__ph img{width:100%;height:100%;object-fit:cover}
 .pc__b{min-width:0}
 .pc__name{font-size:15px;font-weight:700;line-height:1.45;color:var(--title)}
-.pc__role{margin-top:3px;font-size:10.5px;font-weight:700;letter-spacing:.13em;color:var(--orange-t)}
+.pc__role{margin-top:3px;font-size:10.5px;font-weight:700;letter-spacing:.13em;color:var(--orange)}
 .pc__affil{margin-top:6px;font-size:12.5px;line-height:1.55;color:var(--mut)}
 .pc__links{margin-top:9px;justify-content:flex-start}
 
@@ -315,7 +312,7 @@ i{font-style:normal}
 .prow__n{
   display:grid;place-items:center;
   width:34px;height:26px;
-  background:var(--orange-t);color:#fff;border-radius:3px;
+  background:var(--orange);color:#fff;border-radius:3px;
   font-size:12px;font-weight:700;letter-spacing:.06em;
 }
 .prow__b h4{font-size:16.5px;font-weight:700;letter-spacing:.02em}
@@ -464,24 +461,26 @@ i{font-style:normal}
 /* 没有精确指针的设备不做 hover 反馈，免得点一下「粘住」反色状态 */
 @media (hover:none){
   .area:hover{background:var(--paper);border-color:var(--line2)}
-  .area:hover .area__n{color:#8a9097}
+  .area:hover .area__n{color:rgba(0,17,34,.18)}
   .area:hover h3{color:var(--title)}
   .area:hover p{color:var(--ink2)}
   .mem:hover{box-shadow:none;transform:none}
   .mem:hover .mem__ph img{transform:none}
   .pc:hover{border-color:var(--line);box-shadow:none}
   /* 这几处点完会把反色态留在屏幕上，直到用户点别处 */
-  .btn:hover{background:var(--orange-t);color:#fff}
+  .btn:hover{background:var(--orange);color:#fff}
   .btn--o:hover{background:transparent;color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.6)}
   .ic:hover{color:var(--ink2);background:none;border-color:var(--line2)}
-  .lang:hover{background:none;color:var(--orange-t)}
+  .lang:hover{background:none;color:var(--orange)}
   .nav a:hover{color:var(--ink2);border-color:transparent}
   .foot a:hover,.foot__col a:hover{color:var(--foot-mut)}
 }
 
 /* 矮视口（手机竖屏 667 以下、以及所有手机横屏）：首屏原本要 693–767px，
    装不下就把 CTA 推到折叠线以下。纽结在这些尺寸上只占地方不给信息，收掉。 */
-@media (max-height:720px){
+/* 手机竖屏（窄且矮）与手机横屏（很矮）首屏装不下，会把 CTA 顶到折叠线以下。
+   必须同时限宽——只写 max-height 会误伤笔记本的浏览器窗口。 */
+@media (max-width:560px) and (max-height:720px){
   .home{min-height:0}
   .home__in{padding-top:44px;padding-bottom:44px}
   .home__art{display:none}
@@ -489,8 +488,12 @@ i{font-style:normal}
   .home__act{margin-top:24px}
 }
 @media (max-width:960px) and (max-height:520px){
+  .home{min-height:0}
   .home__in{padding-top:24px;padding-bottom:24px}
+  .home__art{display:none}
   .home__zh{font-size:clamp(34px,8vw,48px)}
+  .home__tag{margin-top:20px;padding-top:18px}
+  .home__act{margin-top:22px}
 }
 
 @media (prefers-reduced-motion:reduce){

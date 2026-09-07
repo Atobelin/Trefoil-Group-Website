@@ -138,7 +138,7 @@
     var list = S.areas || [], h = '', i;
     for (i = 0; i < list.length; i++) {
       h += '<li class="area">' +
-             '<span class="area__n">' + pad(i) + '</span>' +
+             '<span class="area__n" aria-hidden="true">' + pad(i) + '</span>' +
              '<h3>' + esc(pick(list[i].name)) + '</h3>' +
              '<p>' + esc(pick(list[i].desc)) + '</p>' +
            '</li>';
