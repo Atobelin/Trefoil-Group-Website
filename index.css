@@ -412,9 +412,12 @@ i{font-style:normal}
   .sec{padding:68px 0}
   .stitle{margin-bottom:40px}
   .about p{font-size:16.5px;line-height:1.95;text-align:left}
+  .foot__top{grid-template-columns:1fr;gap:30px}
+}
+/* 单栏门槛压到 700：744px 的竖屏 iPad 原来拿手机版单栏，比 781px 的窗口还浪费 */
+@media (max-width:700px){
   .areas{grid-template-columns:1fr}
   .pcards{grid-template-columns:1fr}
-  .foot__top{grid-template-columns:1fr;gap:30px}
 }
 @media (max-width:520px){
   .wrap{padding:0 20px}
@@ -443,11 +446,12 @@ i{font-style:normal}
 
 /* 触摸设备一律放大可点目标——只按宽度判定会漏掉 iPad Pro 竖屏（1024px 但是触摸屏） */
 @media (pointer:coarse){
-  .lang{padding:10px 14px}
-  .navbtn{padding:12px 14px}
+  /* 这三个原来是 34–40.5px 高，都够不到 44 */
+  .lang{padding:12px 14px}
+  .navbtn{padding:14px 14px}
   .ic{width:44px;height:44px}
   .ic svg{width:19px;height:19px}
-  .brand{padding:6px 0}
+  .brand{padding:8px 0}
   /* 页脚的文字链接原来只有 20–24px 高，手指点不准 */
   .foot__col--nav a{display:inline-block;padding:7px 0}
   .cinfo dd a,.foot__bottom a{display:inline-block;padding:6px 0}

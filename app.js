@@ -226,7 +226,7 @@
     txt('foot-contact-h', pick(LBL.contact));
 
     set('foot-qr',
-      '<p class="foot__ch">' + esc(pick(LBL.wechat)) + '</p>' +
+      '<h2 class="foot__ch">' + esc(pick(LBL.wechat)) + '</h2>' +
       '<img class="foot__qr" src="./imgs/code.jpg" width="344" height="344" alt="' +
       esc(pick(LBL.wechat)) + '" loading="lazy">' +
       '<p class="foot__qrn">' + esc(pick(LBL.qrNote)) + '</p>');
